@@ -1,0 +1,40 @@
+<?php
+// Function to find highest and lowest values
+function findHighLow($numbers) {
+    // Check if array is not empty
+    if (empty($numbers)) {
+        return "Array is empty.";
+    }
+
+    $highest = max($numbers);  // built-in function to get max value
+    $lowest = min($numbers);   // built-in function to get min value
+
+    return [
+        'highest' => $highest,
+        'lowest' => $lowest
+    ];
+}
+
+// Sample array of numbers
+$numberArray = [45, 12, 78, 3, 56, 89, 22];
+
+// Call the function
+$result = findHighLow($numberArray);
+
+// Display the results
+echo "<h3>Number Array:</h3>";
+echo implode(", ", $numberArray);  // Print array values
+
+echo "<h3>Results:</h3>";
+echo "Highest Number: " . $result['highest'] . "<br>";
+echo "Lowest Number: " . $result['lowest'];
+?>
+
+OUTPUT:
+
+Number Array:
+45, 12, 78, 3, 56, 89, 22
+
+Results:
+Highest Number: 89
+Lowest Number: 3
