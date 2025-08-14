@@ -1,0 +1,172 @@
+* if, else, elseif — conditional branching
+* switch — multi-way branching
+* for — loops with a known number of iterations
+* while — loops based on condition
+*do-while — similar to while but runs at least once
+*foreach — loops through arrays or objects
+*break, continue — control loop flow
+
+* Bank Transaction Problem using PHP Control Structures
+Scenario:
+   * A customer starts with an initial balance. The customer can deposit or withdraw money. The program checks if the withdrawal amount is available before processing. It will print appropriate messages using control structures.
+
+<?php
+// Initial balance
+$balance = 1000;  
+
+// Transaction requests (simulate multiple transactions)
+$transactions = [
+    ['type' => 'deposit', 'amount' => 500],
+    ['type' => 'withdraw', 'amount' => 200],
+    ['type' => 'withdraw', 'amount' => 1500], // Should fail (insufficient funds)
+    ['type' => 'deposit', 'amount' => 300],
+    ['type' => 'withdraw', 'amount' => 400]
+];
+
+// Process each transaction
+foreach ($transactions as $index => $transaction) {
+    echo "Transaction " . ($index + 1) . ": ";
+
+    switch ($transaction['type']) {
+        case 'deposit':
+            // Deposit amount
+            $balance += $transaction['amount'];
+            echo "Deposited Rs." . $transaction['amount'] . ". ";
+            echo "New balance: Rs." . $balance . "<br>";
+            break;
+
+        case 'withdraw':
+            // Withdraw amount, check balance
+            if ($transaction['amount'] <= $balance) {
+                $balance -= $transaction['amount'];
+                echo "Withdrew Rs." . $transaction['amount'] . ". ";
+                echo "New balance: Rs." . $balance . "<br>";
+            } else {
+                echo "Withdrawal of Rs." . $transaction['amount'] . " failed: Insufficient funds. ";
+                echo "Current balance: Rs." . $balance . "<br>";
+            }
+            break;
+
+        default:
+            echo "Invalid transaction type.<br>";
+            break;
+    }
+}
+
+// Final balance
+echo "<br><strong>Final Balance: Rs." . $balance . "</strong>";
+?>
+
+
+<?php
+// Initial balance
+$balance = 1000;  
+
+// Transaction requests (simulate multiple transactions)
+$transactions = [
+    ['type' => 'deposit', 'amount' => 500],
+    ['type' => 'withdraw', 'amount' => 200],
+    ['type' => 'withdraw', 'amount' => 1500], // Should fail (insufficient funds)
+    ['type' => 'deposit', 'amount' => 300],
+    ['type' => 'withdraw', 'amount' => 400]
+];
+
+// Process each transaction
+foreach ($transactions as $index => $transaction) {
+    echo "Transaction " . ($index + 1) . ": ";
+
+    switch ($transaction['type']) {
+        case 'deposit':
+            // Deposit amount
+            $balance += $transaction['amount'];
+            echo "Deposited Rs." . $transaction['amount'] . ". ";
+            echo "New balance: Rs." . $balance . "<br>";
+            break;
+
+        case 'withdraw':
+            // Withdraw amount, check balance
+            if ($transaction['amount'] <= $balance) {
+                $balance -= $transaction['amount'];
+                echo "Withdrew Rs." . $transaction['amount'] . ". ";
+                echo "New balance: Rs." . $balance . "<br>";
+            } else {
+                echo "Withdrawal of Rs." . $transaction['amount'] . " failed: Insufficient funds. ";
+                echo "Current balance: Rs." . $balance . "<br>";
+            }
+            break;
+
+        default:
+            echo "Invalid transaction type.<br>";
+            break;
+    }
+}
+
+// Final balance
+echo "<br><strong>Final Balance: Rs." . $balance . "</strong>";
+?>
+<?php
+// Initial balance
+$balance = 1000;  
+
+// Transaction requests (simulate multiple transactions)
+$transactions = [
+    ['type' => 'deposit', 'amount' => 500],
+    ['type' => 'withdraw', 'amount' => 200],
+    ['type' => 'withdraw', 'amount' => 1500], // Should fail (insufficient funds)
+    ['type' => 'deposit', 'amount' => 300],
+    ['type' => 'withdraw', 'amount' => 400]
+];
+
+// Process each transaction
+foreach ($transactions as $index => $transaction) {
+    echo "Transaction " . ($index + 1) . ": ";
+
+    switch ($transaction['type']) {
+        case 'deposit':
+            // Deposit amount
+            $balance += $transaction['amount'];
+            echo "Deposited Rs." . $transaction['amount'] . ". ";
+            echo "New balance: Rs." . $balance . "<br>";
+            break;
+
+        case 'withdraw':
+            // Withdraw amount, check balance
+            if ($transaction['amount'] <= $balance) {
+                $balance -= $transaction['amount'];
+                echo "Withdrew Rs." . $transaction['amount'] . ". ";
+                echo "New balance: Rs." . $balance . "<br>";
+            } else {
+                echo "Withdrawal of Rs." . $transaction['amount'] . " failed: Insufficient funds. ";
+                echo "Current balance: Rs." . $balance . "<br>";
+            }
+            break;
+
+        default:
+            echo "Invalid transaction type.<br>";
+            break;
+    }
+}
+
+// Final balance
+echo "<br><strong>Final Balance: Rs." . $balance . "</strong>";
+?>
+
+Explanation:
+
+* We use an array $transactions to simulate multiple deposit/withdraw requests.
+* A foreach loop processes each transaction.
+* A switch statement checks the transaction type (deposit or withdraw).
+* For withdrawals, an if-else condition verifies sufficient balance.
+* Messages display each transaction’s result and the updated balance.
+* Finally, the final balance is displayed.
+
+OUTPUT:
+Transaction 1: Deposited Rs.500. New balance: Rs.1500
+Transaction 2: Withdrew Rs.200. New balance: Rs.1300
+Transaction 3: Withdrawal of Rs.1500 failed: Insufficient funds. Current balance: Rs.1300
+Transaction 4: Deposited Rs.300. New balance: Rs.1600
+Transaction 5: Withdrew Rs.400. New balance: Rs.1200
+
+Final Balance: Rs.1200
+
+
