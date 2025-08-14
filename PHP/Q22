@@ -1,0 +1,18 @@
+<?php
+// Given string
+$text = "PHP is powerful. Learning PHP is fun. PHP is widely used.";
+
+// Word to count
+$word = "PHP";
+
+// Use substr_count() to count the number of times the word appears
+$count = substr_count($text, $word);
+
+// Display result
+echo "The word '$word' occurs $count times in the given string.";
+?>
+
+
+OUTPUT:
+
+The word 'PHP' occurs 3 times in the given string.
