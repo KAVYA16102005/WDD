@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chess Board in PHP</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+        }
+        .white {
+            background-color: #ffffff;
+        }
+        .black {
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Chess Board</h2>
+
+<table border="1">
+    <?php
+    for ($row = 1; $row <= 8; $row++) {
+        echo "<tr>";
+        for ($col = 1; $col <= 8; $col++) {
+            // Sum of row and column to determine color
+            $total = $row + $col;
+
+            // If even, white; else black
+            if ($total % 2 == 0) {
+                echo "<td class='white'></td>";
+            } else {
+                echo "<td class='black'></td>";
+            }
+        }
+        echo "</tr>";
+    }
+    ?>
+</table>
+
+</body>
+</html>
