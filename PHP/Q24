@@ -1,0 +1,53 @@
+<?php
+$text = "  Hello, PHP is Powerful!  ";
+$name = "John Doe";
+
+// 1. trim() - Remove whitespace from both ends
+echo "Original: '$text'<br>";
+echo "Trimmed: '" . trim($text) . "'<br><br>";
+
+// 2. strlen() - Get string length
+echo "Length of name: " . strlen($name) . "<br><br>";
+
+// 3. strrev() - Reverse a string
+echo "Reversed name: " . strrev($name) . "<br><br>";
+
+// 4. strtolower() and strtoupper()
+echo "Lowercase: " . strtolower($text) . "<br>";
+echo "Uppercase: " . strtoupper($text) . "<br><br>";
+
+// 5. ucwords() and ucfirst()
+echo "Title Case: " . ucwords(strtolower($name)) . "<br>";
+echo "First Letter Capital: " . ucfirst(strtolower($name)) . "<br><br>";
+
+// 6. strpos() - Find position of substring
+$pos = strpos($text, "PHP");
+echo "'PHP' found at position: $pos<br><br>";
+
+// 7. str_replace() - Replace part of string
+$replaced = str_replace("Powerful", "awesome", $text);
+echo "After replace: $replaced<br><br>";
+
+// 8. substr() - Get part of a string
+echo "Substring from index 2 to 5: " . substr($name, 2, 4) . "<br><br>";
+
+// 9. explode() - Convert string to array
+$csv = "apple,banana,orange";
+$fruits = explode(",", $csv);
+echo "Exploded array: ";
+print_r($fruits);
+echo "<br><br>";
+
+// 10. implode() - Convert array to string
+echo "Imploded string: " . implode(" - ", $fruits) . "<br><br>";
+
+// 11. str_repeat() - Repeat a string
+echo "Repeat '*': " . str_repeat("*", 10) . "<br><br>";
+
+// 12. strcmp() - Compare strings
+echo "Compare 'hello' and 'Hello': " . strcmp("hello", "Hello") . "<br><br>";
+
+// 13. nl2br() - Convert newlines to <br>
+$paragraph = "This is line 1.\nThis is line 2.";
+echo "With nl2br:<br>" . nl2br($paragraph);
+?>
