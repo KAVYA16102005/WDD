@@ -1,0 +1,20 @@
+* The substr() function extracts a substring from a string.
+
+* Here, the first argument is 12345, an integer, but PHP automatically converts it to the string "12345" because substr() requires a string.
+
+* substr("12345", 2, 2) means:
+
+* Start at index 2 (0-based indexing), which is the character '3'.
+
+* Extract 2 characters starting from there → "34".
+
+* So, $sub will be "34".
+
+* The output of the code will be:
+
+* sub is 34
+
+* Although it works, it's better to explicitly convert the number to a string for clarity, like:
+  $sub = substr(strval(12345), 2, 2);
+
+* This avoids confusion and improves code readability.
