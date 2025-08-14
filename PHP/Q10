@@ -1,0 +1,33 @@
+<?php
+// Array of student marks
+$marks = [85, 72, 67, 54, 39, 90, 77];
+
+// Loop through each mark and assign grade
+foreach ($marks as $index => $mark) {
+    echo "Student " . ($index + 1) . " scored $mark marks - Grade: ";
+
+    if ($mark >= 80) {
+        echo "A";
+    } elseif ($mark >= 70) {
+        echo "B";
+    } elseif ($mark >= 60) {
+        echo "C";
+    } elseif ($mark >= 50) {
+        echo "D";
+    } else {
+        echo "F";
+    }
+
+    echo "<br>";
+}
+?>
+
+OUTPUT:
+
+Student 1 scored 85 marks - Grade: A
+Student 2 scored 72 marks - Grade: B
+Student 3 scored 67 marks - Grade: C
+Student 4 scored 54 marks - Grade: D
+Student 5 scored 39 marks - Grade: F
+Student 6 scored 90 marks - Grade: A
+Student 7 scored 77 marks - Grade: B
