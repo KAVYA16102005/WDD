@@ -1,0 +1,30 @@
+What is isset()?
+    * The isset() function in PHP is used to check if a variable is set and not null.
+
+<?php
+$name = "Alice";
+$age = null;
+
+if (isset($name)) {
+    echo "The variable 'name' is set.<br>";
+}
+
+if (isset($age)) {
+    echo "The variable 'age' is set.<br>";
+} else {
+    echo "The variable 'age' is NOT set or is NULL.<br>";
+}
+
+if (isset($email)) {
+    echo "The variable 'email' is set.<br>";
+} else {
+    echo "The variable 'email' is NOT set.<br>";
+}
+?>
+
+OUTPUT:
+
+The variable 'name' is set.
+The variable 'age' is NOT set or is NULL.
+The variable 'email' is NOT set.
+
