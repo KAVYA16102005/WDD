@@ -1,0 +1,56 @@
+<?php
+$name = $email = $message = "";
+$error = $success = "";
+
+// Form submission logic
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get and trim inputs
+    $name = trim($_POST["name"]);
+    $email = trim($_POST["email"]);
+    $message = trim($_POST["message"]);
+
+    // Validate inputs
+    if (empty($name) || empty($email) || empty($message)) {
+        $error = "All fields are required.";
+    } else {
+        // All fields filled
+        $success = "Thank you, <strong>$name</strong>. Your message has been sent.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form with Validation</title>
+</head>
+<body>
+
+<h2>Contact Us</h2>
+
+<!-- Show error or success message -->
+<?php
+if (!empty($error)) {
+    echo "<p style='color:red;'>$error</p>";
+}
+if (!empty($success)) {
+    echo "<p style='color:green;'>$success</p>";
+}
+?>
+
+<!-- Contact Form -->
+<form method="post" action="">
+    <label>Name:</label><br>
+    <input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>"><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" value="<?php echo htmlspecialchars($email); ?>"><br><br>
+
+    <label>Message:</label><br>
+    <textarea name="message" rows="5" cols="30"><?php echo htmlspecialchars($message); ?></textarea><br><br>
+
+    <input type="submit" value="Send">
+</form>
+
+</body>
+</html>
