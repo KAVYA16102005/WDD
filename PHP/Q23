@@ -1,0 +1,56 @@
+* Prioritizing GET and POST in PHP
+
+* GET Method
+    * Appends data to the URL.
+    * Used for retrieving data.
+    * Can be bookmarked, shared, and cached.
+    * Not secure for sensitive data (visible in URL).
+    * Limit on the amount of data (URL length limit).
+
+* Use GET When:
+    * You're just retrieving data.
+    * You want users to bookmark or share the URL.
+    * Example: Searching for products, filtering data.
+
+* POST Method
+    * Sends data in the HTTP request body (not visible in URL).
+    * Used for submitting data securely.
+    * No size limit for data (practically).
+    * Cannot be bookmarked or cached.
+
+* Use POST When:
+    * You're submitting forms with sensitive information.
+    * You're updating or inserting data (e.g., login, registration).
+
+
+Using POST:
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST["name"]);
+    $email = htmlspecialchars($_POST["email"]);
+    echo "Hello, $name. We will contact you at $email.";
+}
+?>
+
+<form method="post" action="">
+    Name: <input type="text" name="name"><br><br>
+    Email: <input type="email" name="email"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+
+Using GET:
+
+<?php
+if (isset($_GET['query'])) {
+    $query = htmlspecialchars($_GET['query']);
+    echo "You searched for: $query";
+}
+?>
+
+<form method="get" action="">
+    Search: <input type="text" name="query">
+    <input type="submit" value="Search">
+</form>
+
