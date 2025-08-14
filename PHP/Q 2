@@ -1,0 +1,19 @@
+<?php
+$size = 3;
+
+// Print the header row
+for ($i = 1; $i <= $size; $i++) {
+    echo "$i\t";
+}
+echo "\n";
+
+// Print the division rows
+for ($row = 1; $row <= $size; $row++) {
+    echo "$row\t";
+    for ($col = 1; $col <= $size; $col++) {
+        $result = $row / $col;
+        echo round($result, 2) . "\t";
+    }
+    echo "\n";
+}
+?>
