@@ -1,0 +1,42 @@
+<?php
+// Function to add two numbers
+function addNumbers($num1, $num2) {
+    return $num1 + $num2;
+}
+
+$result = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get numbers from form input and convert to float
+    $number1 = isset($_POST['number1']) ? floatval($_POST['number1']) : 0;
+    $number2 = isset($_POST['number2']) ? floatval($_POST['number2']) : 0;
+
+    // Calculate sum using the function
+    $result = addNumbers($number1, $number2);
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Two Numbers</title>
+</head>
+<body>
+
+<h2>Add Two Numbers</h2>
+
+<form method="post" action="">
+    Number 1: <input type="number" step="any" name="number1" required><br><br>
+    Number 2: <input type="number" step="any" name="number2" required><br><br>
+    <input type="submit" value="Calculate Sum">
+</form>
+
+<?php
+if ($result !== "") {
+    echo "<h3>Sum: $result</h3>";
+}
+?>
+
+</body>
+</html>
+.
