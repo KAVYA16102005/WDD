@@ -1,0 +1,69 @@
+There are several methods to pass information (data) from one PHP page to another. The most common ones are:
+
+Using GET method – Data is passed through the URL.
+
+Using POST method – Data is sent securely in the request body.
+
+Using Sessions – Data is stored on the server across multiple pages.
+
+Using Cookies – Data is stored on the client’s browser.
+
+EXAMPLE PROGRAM:
+
+<?php
+session_start();
+
+// --- METHOD 1: GET ---
+if (isset($_GET['method']) && $_GET['method'] == 'get') {
+    $name = $_GET['name'];
+    echo "<h3>GET Method</h3>";
+    echo "Hello, $name (received via GET)";
+    exit();
+}
+
+// --- METHOD 2: POST ---
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
+    $name = $_POST['name'];
+    echo "<h3>POST Method</h3>";
+    echo "Hello, $name (received via POST)";
+    exit();
+}
+
+// --- METHOD 3: SESSION ---
+if (isset($_GET['method']) && $_GET['method'] == 'session_set') {
+    $_SESSION['name'] = 'Charlie';
+    header("Location: index.php?method=session_get");
+    exit();
+}
+
+if (isset($_GET['method']) && $_GET['method'] == 'session_get') {
+    echo "<h3>SESSION Method</h3>";
+    echo "Hello, " . $_SESSION['name'] . " (received via SESSION)";
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP Data Passing Methods</title>
+</head>
+<body>
+
+    <h2>PHP Data Passing Between Pages</h2>
+
+    <!-- GET Method -->
+    <p><a href="index.php?method=get&name=Alice">Click Here to Pass Data using GET</a></p>
+
+    <!-- POST Method -->
+    <form action="index.php" method="post">
+        <label>Enter Name (POST): </label>
+        <input type="text" name="name" required>
+        <input type="submit" value="Send using POST">
+    </form>
+
+    <!-- SESSION Method -->
+    <p><a href="index.php?method=session_set">Click Here to Pass Data using SESSION</a></p>
+
+</body>
+</html>
