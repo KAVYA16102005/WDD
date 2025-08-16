@@ -1,49 +1,25 @@
 <?php
-$name = $email = $message = "";
-$confirmation = "";
+// Function to calculate sum of digits
+function sumOfDigits($number) {
+    $sum = 0;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get and sanitize input values
-    $name = htmlspecialchars(trim($_POST['name']));
-    $email = htmlspecialchars(trim($_POST['email']));
-    $message = htmlspecialchars(trim($_POST['message']));
-    
-    if (!empty($name) && !empty($email)) {
-        $confirmation = "Thank you, <strong>$name</strong>! We have received your message.<br>";
-        $confirmation .= "A confirmation email will be sent to <strong>$email</strong>.";
-    } else {
-        $confirmation = "<span style='color:red;'>Please fill in your name and email.</span>";
+    // Convert number to positive (in case of negative input)
+    $number = abs($number);
+
+    // Loop until number becomes 0
+    while ($number > 0) {
+        $digit = $number % 10;   // Get the last digit
+        $sum += $digit;          // Add digit to sum
+        $number = (int)($number / 10); // Remove last digit
     }
+
+    return $sum;
 }
+
+// Example usage
+$num = 12345;
+echo "The sum of digits of $num is: " . sumOfDigits($num);
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User Contact Form</title>
-</head>
-<body>
-
-<h2>Contact Form</h2>
-
-<?php
-if ($confirmation) {
-    echo "<p>$confirmation</p>";
-}
-?>
-
-<form method="post" action="">
-    <label>Name:</label><br>
-    <input type="text" name="name" value="<?php echo $name; ?>" required><br><br>
-    
-    <label>Email:</label><br>
-    <input type="email" name="email" value="<?php echo $email; ?>" required><br><br>
-    
-    <label>Message:</label><br>
-    <textarea name="message" rows="5" cols="30"><?php echo $message; ?></textarea><br><br>
-    
-    <input type="submit" value="Submit">
-</form>
-
-</body>
-</html>
+output:
+The sum of digits of 12345 is: 15
