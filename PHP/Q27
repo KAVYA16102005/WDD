@@ -1,0 +1,11 @@
+<?php
+$x = 12;
+$y = 5;
+
+echo "Addition: " . ($x + $y) . "\n";       // 17
+echo "Subtraction: " . ($x - $y) . "\n";    // 7
+echo "Multiplication: " . ($x * $y) . "\n"; // 60
+echo "Division: " . ($x / $y) . "\n";       // 2.4
+echo "Modulus: " . ($x % $y) . "\n";        // 2
+echo "Exponent: " . ($x ** $y) . "\n";      // 248832
+?>
