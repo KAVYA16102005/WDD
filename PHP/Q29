@@ -1,0 +1,26 @@
+<?php
+// Demonstrating usage of different PHP functions
+
+// (i) rand()
+echo "Random number (1-100): " . rand(1, 100) . "<br>";
+
+// (ii) abs()
+echo "Absolute value of -25: " . abs(-25) . "<br>";
+
+// (iii) str_replace()
+$text = "I like Java";
+echo "After replacement: " . str_replace("Java", "PHP", $text) . "<br>";
+
+// (iv) pi()
+echo "Value of pi: " . pi() . "<br>";
+
+// (v) ceil()
+echo "Ceil of 4.3: " . ceil(4.3) . "<br>";
+?>
+
+OUTPUT:
+Random number (1-100): 57
+Absolute value of -25: 25
+After replacement: I like PHP
+Value of pi: 3.1415926535898
+Ceil of 4.3: 5
