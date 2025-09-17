@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP Loops Demo</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 40px;
+            background-color: #f0f0f0;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label, select, input {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        .output {
+            max-width: 400px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<form method="POST">
+    <label for="loopType">Choose Loop Type:</label>
+    <select name="loopType" id="loopType" required>
+        <option value="for">For Loop</option>
+        <option value="while">While Loop</option>
+        <option value="do">Do-While Loop</option>
+    </select>
+
+    <label for="limit">Enter a number:</label>
+    <input type="number" name="limit" id="limit" min="1" required>
+
+    <button type="submit">Run Loop</button>
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $loopType = $_POST["loopType"];
+    $limit = intval($_POST["limit"]);
+
+    echo "<div class='output'><strong>Output:</strong><br>";
+
+    switch ($loopType) {
+        case "for":
+            for ($i = 1; $i <= $limit; $i++) {
+                echo "For Loop - Number: $i<br>";
+            }
+            break;
+
+        case "while":
+            $i = 1;
+            while ($i <= $limit) {
+                echo "While Loop - Number: $i<br>";
+                $i++;
+            }
+            break;
+        case "do":
+            $i = 1;
+            do {
+                echo "Do-While Loop - Number: $i<br>";
+                $i++;
+            } while ($i <= $limit);
+            break;
+        default:
+            echo "Invalid loop type selected.";
+    }
+    echo "</div>";
+}
+?>
+
+</body>
+</html>
+
+
+
+
