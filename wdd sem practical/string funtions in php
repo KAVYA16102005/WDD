@@ -1,0 +1,105 @@
+<?php
+$name = $blood = $city = $comment = '';
+$results = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $blood = trim($_POST['blood_group']);
+  $city = trim($_POST['city']);
+  $comment = trim($_POST['comment']);
+
+  // Apply string functions
+  $results['Formatted Name'] = ucwords($name);
+  $results['Uppercase Blood Group'] = strtoupper($blood);
+  $results['Lowercase City'] = strtolower($city);
+  $results['Comment Length'] = strlen($comment) . " characters";
+  $results['Reversed Name'] = strrev($name);
+  $results['Cleaned Comment'] = ucfirst(strtolower($comment));
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Donor String Processor</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      padding: 40px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #c62828;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #c62828;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    .output {
+      background: #e8f5e9;
+      padding: 15px;
+      border-radius: 4px;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .output p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Blood Donation Info Processor</h1>
+
+    <form method="POST">
+      <input type="text" name="name" placeholder="Your Full Name" required>
+      <input type="text" name="blood_group" placeholder="Blood Group (e.g., A+)" required>
+      <input type="text" name="city" placeholder="Your City" required>
+      <textarea name="comment" placeholder="Why do you want to donate blood?" rows="4" required></textarea>
+      <button type="submit">Process Info</button>
+    </form>
+    <?php if ($results): ?>
+      <div class="output">
+        <?php foreach ($results as $label => $value): ?>
+          <p><?= $label ?>: <?= htmlspecialchars($value) ?></p>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
+  </div>
+</body>
+</html>
+
