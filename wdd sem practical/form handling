@@ -49,7 +49,7 @@
 </head>
 <body>
 <center>
-    <h1><CNTER>BLOOD DONATION FORM</CNTER></h1>
+    <h1><CENTER>BLOOD DONATION FORM</CENTER></h1>
     <form method="post">
         Name: <input type="text" name="name" required><br><br>
         Email: <input type="text" name="email" required><br><br>
