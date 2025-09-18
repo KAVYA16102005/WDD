@@ -1,0 +1,122 @@
+<?php
+session_start();
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $age = (int)$_POST['age'];
+  $blood = $_POST['blood_group'];
+
+  if ($name && $age > 0 && $blood) {
+    setcookie('donor_name', $name, time() + (86400 * 30), "/"); // Cookie valid for 30 days
+    $_SESSION['visits'] = 1;
+    $_SESSION['blood_group'] = $blood;
+    $_SESSION['age'] = $age;
+  }
+}
+
+// Update session visit count
+if (isset($_SESSION['visits'])) {
+  $_SESSION['visits']++;
+} else {
+  $_SESSION['visits'] = 1;
+}
+
+// Read cookie
+$donor = $_COOKIE['donor_name'] ?? 'Guest';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Donation Registration</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #c62828;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #c62828;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    .info {
+      background: #ffebee;
+      padding: 15px;
+      border-radius: 4px;
+      color: #c62828;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Blood Donation Registration</h1>
+
+    <form method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="number" name="age" placeholder="Your Age" required>
+      <select name="blood_group" required>
+        <option value="">Select Blood Group</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+      </select>
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="info">
+      Hello, <?= htmlspecialchars($donor) ?>!<br>
+      Age: <?= $_SESSION['age'] ?? 'N/A' ?><br>
+      Blood Group: <?= $_SESSION['blood_group'] ?? 'N/A' ?><br>
+      You have visited this page <?= $_SESSION['visits'] ?> times.
+    </div>
+  </div>
+</body>
+</html>
+
