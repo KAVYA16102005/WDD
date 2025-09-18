@@ -1,97 +1,132 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>PHP Loops Demo</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 40px;
-            background-color: #f0f0f0;
-        }
-        form {
-            background: #fff;
-            padding: 20px;
-            max-width: 400px;
-            margin: auto;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        label, select, input {
-            display: block;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-        button {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            width: 100%;
-            cursor: pointer;
-        }
-        .output {
-            max-width: 400px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-        }
-    </style>
-</head>
-<body>
-
-<form method="POST">
-    <label for="loopType">Choose Loop Type:</label>
-    <select name="loopType" id="loopType" required>
-        <option value="for">For Loop</option>
-        <option value="while">While Loop</option>
-        <option value="do">Do-While Loop</option>
-    </select>
-
-    <label for="limit">Enter a number:</label>
-    <input type="number" name="limit" id="limit" min="1" required>
-
-    <button type="submit">Run Loop</button>
-</form>
-
 <?php
+$output = '';
+$sampleArray = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $loopType = $_POST["loopType"];
-    $limit = intval($_POST["limit"]);
+  $loopType = $_POST["loopType"];
+  $limit = isset($_POST["limit"]) ? intval($_POST["limit"]) : 0;
 
-    echo "<div class='output'><strong>Output:</strong><br>";
+  ob_start(); // Capture output
 
-    switch ($loopType) {
-        case "for":
-            for ($i = 1; $i <= $limit; $i++) {
-                echo "For Loop - Number: $i<br>";
-            }
-            break;
+  switch ($loopType) {
+    case "for":
+      for ($i = 1; $i <= $limit; $i++) {
+        echo "For Loop - $i<br>";
+      }
+      break;
 
-        case "while":
-            $i = 1;
-            while ($i <= $limit) {
-                echo "While Loop - Number: $i<br>";
-                $i++;
-            }
-            break;
-        case "do":
-            $i = 1;
-            do {
-                echo "Do-While Loop - Number: $i<br>";
-                $i++;
-            } while ($i <= $limit);
-            break;
-        default:
-            echo "Invalid loop type selected.";
-    }
-    echo "</div>";
+    case "while":
+      $i = 1;
+      while ($i <= $limit) {
+        echo "While Loop - $i<br>";
+        $i++;
+      }
+      break;
+
+    case "do":
+      $i = 1;
+      do {
+        echo "Do-While Loop - $i<br>";
+        $i++;
+      } while ($i <= $limit);
+      break;
+
+    case "foreach":
+      foreach ($sampleArray as $item) {
+        echo "Foreach Loop - $item<br>";
+      }
+      break;
+
+    default:
+      echo "Invalid loop type.";
+  }
+
+  $output = ob_get_clean();
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PHP Loop Playground</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f0f0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    select, input[type="number"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #388E3C;
+    }
+
+    .output {
+      margin-top: 20px;
+      background: #e8f5e9;
+      padding: 15px;
+      border-radius: 4px;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PHP Loop Playground</h1>
+    <form method="POST">
+      <label for="loopType">Choose Loop Type:</label>
+      <select name="loopType" id="loopType" required>
+        <option value="for">For Loop</option>
+        <option value="while">While Loop</option>
+        <option value="do">Do-While Loop</option>
+        <option value="foreach">Foreach Loop (Sample Array)</option>
+      </select>
+
+      <label for="limit">Enter a number (for loops):</label>
+      <input type="number" name="limit" id="limit" min="1">
+
+      <button type="submit">Run Loop</button>
+    </form>
+
+    <?php if ($output): ?>
+      <div class="output"><?= $output ?></div>
+    <?php endif; ?>
+  </div>
 </body>
 </html>
-
-
-
-
