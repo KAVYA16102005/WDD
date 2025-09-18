@@ -1,0 +1,144 @@
+<?php
+$uploadMessage = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
+  $name = trim($_POST['name']);
+  $age = (int)$_POST['age'];
+  $blood = strtoupper(trim($_POST['blood_group']));
+
+  // Validate basic fields
+  if (!$name || $age < 1 || !$blood) {
+    $uploadMessage = " All fields are required and age must be valid.";
+  } else {
+    $targetDir = "donors/";
+    $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    $uploadOk = 1;
+
+    // Check if image is valid
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if ($check === false) {
+      $uploadMessage = "File is not a valid image.";
+      $uploadOk = 0;
+    }
+
+    // Size limit: 2MB
+    if ($_FILES["image"]["size"] > 2 * 1024 * 1024) {
+      $uploadMessage = " Image too large. Max size is 2MB.";
+      $uploadOk = 0;
+    }
+
+    // Allowed formats
+    $allowedTypes = ["jpg", "jpeg", "png"];
+    if (!in_array($imageFileType, $allowedTypes)) {
+      $uploadMessage = " Only JPG, JPEG, and PNG files are allowed.";
+      $uploadOk = 0;
+    }
+
+    // Upload image
+    if ($uploadOk) {
+      if (!is_dir($targetDir)) {
+        mkdir($targetDir, 0777, true);
+      }
+
+      if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+        $uploadMessage = " Thank you, <strong>$name</strong>! You are registered as a donor with blood group <strong>$blood</strong>.";
+      } else {
+        $uploadMessage = " Error uploading image.";
+      }
+    }
+  }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Donation Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #c62828;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #c62828;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #2e7d32;
+    }
+
+    .error {
+      color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Blood Donation Registration</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="number" name="age" placeholder="Age" required>
+      <select name="blood_group" required>
+        <option value="">-- Select Blood Group --</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+      </select>
+      <input type="file" name="image" required>
+      <button type="submit">Register Donor</button>
+    </form>
+
+    <?php if ($uploadMessage): ?>
+      <div class="message <?= strpos($uploadMessage, '❌') !== false ? 'error' : '' ?>">
+        <?= $uploadMessage ?>
+      </div>
+    <?php endif; ?>
+  </div>
+</body>
+</html>
