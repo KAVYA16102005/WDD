@@ -1,1 +1,186 @@
+DATABASE NAME:blood_donation
 
+CREATE TABLE donors (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  age INT NOT NULL,
+  blood_group VARCHAR(5) NOT NULL,
+  email VARCHAR(100),
+  phone VARCHAR(15)
+);
+
+-- Insert new donors
+INSERT INTO donors (name, age, blood_group, email, phone) 
+VALUES 
+('Alice', 25, 'A+', 'alice@example.com', '9876543210'),
+('Bob', 30, 'O-', 'bob@example.com', '9876501234'),
+('Charlie', 22, 'B+', 'charlie@example.com', '9876512345');
+
+
+-- Update a donor's age and email by ID
+UPDATE donors
+SET age = 26, email = 'alice.new@example.com'
+WHERE id = 1;
+
+-- Update blood group of a donor by name
+UPDATE donors
+SET blood_group = 'AB+'
+WHERE name = 'Bob';
+
+
+-- Delete a donor by ID
+DELETE FROM donors
+WHERE id = 3;
+
+-- Delete a donor by name
+DELETE FROM donors
+WHERE name = 'Bob';
+
+
+-- View all donors
+SELECT * FROM donors;
+
+-- View only donors with age >= 18
+SELECT * FROM donors
+WHERE age >= 18;
+
+-- View specific columns
+SELECT name, blood_group, phone FROM donors;
+
+
+
+Php code:
+
+
+
+<?php
+// Database connection
+$host = "localhost";
+$user = "root";
+$password = "";
+$dbname = "blood_donation";
+
+$conn = new mysqli($host, $user, $password, $dbname);
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$message = '';
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = trim($_POST["name"]);
+  $age = (int)$_POST["age"];
+  $blood = $_POST["blood_group"];
+  $email = trim($_POST["email"]);
+  $phone = trim($_POST["phone"]);
+
+  if ($name && $age >= 18 && $blood) {
+    $stmt = $conn->prepare("INSERT INTO donors (name, age, blood_group, email, phone) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sisss", $name, $age, $blood, $email, $phone);
+
+    if ($stmt->execute()) {
+      $message = "Donor registered successfully!";
+    } else {
+      $message = "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+  } else {
+    $message = "Please fill all required fields and ensure age is 18 or above.";
+  }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Donor Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #c62828;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #c62828;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #2e7d32;
+    }
+
+    .error {
+      color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Blood Donor Registration</h1>
+    <form method="POST">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="number" name="age" placeholder="Age (18+)" required>
+      <select name="blood_group" required>
+        <option value="">-- Select Blood Group --</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+      </select>
+      <input type="email" name="email" placeholder="Email">
+      <input type="text" name="phone" placeholder="Phone">
+      <button type="submit">Register</button>
+    </form>
+
+    <?php if ($message): ?>
+      <div class="message <?= strpos($message, 'Error') !== false || strpos($message, 'Please') !== false ? 'error' : '' ?>">
+        <?= $message ?>
+      </div>
+    <?php endif; ?>
+  </div>
+</body>
+</html>
