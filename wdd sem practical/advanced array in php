@@ -1,0 +1,124 @@
+<?php
+session_start();
+
+// Initialize donor list if not already set
+if (!isset($_SESSION['donors'])) {
+  $_SESSION['donors'] = [
+    ["name" => "Alice", "age" => 25, "blood" => "A+"],
+    ["name" => "Bob", "age" => 17, "blood" => "O-"],
+    ["name" => "Charlie", "age" => 30, "blood" => "B+"]
+  ];
+}
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $age = (int)$_POST['age'];
+  $blood = strtoupper(trim($_POST['blood_group']));
+
+  if ($name && $age > 0 && $blood) {
+    $_SESSION['donors'][] = ["name" => $name, "age" => $age, "blood" => $blood];
+  }
+}
+
+// Filter eligible donors (age ≥ 18)
+$eligibleDonors = array_filter($_SESSION['donors'], fn($donor) => $donor['age'] >= 18);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Donation Registration</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f0f0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #c62828;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #c62828;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #ffebee;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 4px;
+      color: #c62828;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Blood Donation Registration</h1>
+    <form method="POST">
+      <input type="text" name="name" placeholder="Enter name" required>
+      <input type="number" name="age" placeholder="Enter age" required>
+      <select name="blood_group" required>
+        <option value="">-- Select Blood Group --</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+      </select>
+      <button type="submit">Register Donor</button>
+    </form>
+
+    <h2>REGISTERED DONORS</h2>
+    <ul>
+      <?php foreach ($eligibleDonors as $donor): ?>
+        <li><?= htmlspecialchars($donor['name']) ?> — <?= htmlspecialchars($donor['blood']) ?></li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+</body>
+</html>
