@@ -1,0 +1,129 @@
+<?php
+$result = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $rawInput = $_POST['array_input'] ?? '';
+  $function = $_POST['array_function'] ?? '';
+
+  // Convert comma-separated string to array
+  $array = array_map('trim', explode(',', $rawInput));
+
+  // Apply selected function
+  switch ($function) {
+    case 'uppercase':
+      $result = array_map('strtoupper', $array);
+      break;
+    case 'sort':
+        $result = $array;
+        sort($result);
+        break;
+    case 'count':
+        $result = ["Total items: " . count($array)];
+        break;
+    case 'reverse':
+      $result = array_reverse($array);
+      break;
+    case 'filter_p':
+      $result = array_filter($array, fn($item) => str_starts_with($item, 'P'));
+      break;
+    default:
+      $result = $array;
+  }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive PHP Array Functions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f0f0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 5px 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PHP Array Function Playground</h1>
+
+    <form method="POST">
+      <input type="text" name="array_input" placeholder="Enter comma-separated values" required>
+      
+      <select name="array_function" required>
+        <option value="">-- Select Function --</option>
+        <option value="sort">Sort Alphabetically</option>
+        <option value="count">Count Items</option>
+        <option value="uppercase">Convert to Uppercase</option>
+        <option value="reverse">Reverse Array</option>
+        <option value="filter_A">Filter Items Starting with 'A'</option>
+      </select>
+
+      <button type="submit">Apply Function</button>
+    </form>
+
+    <?php if (!empty($result)): ?>
+      <h2>Result:</h2>
+      <ul>
+        <?php foreach ($result as $item): ?>
+          <li><?= htmlspecialchars($item) ?></li>
+        <?php endforeach; ?>
+      </ul>
+    <?php endif; ?>
+  </div>
+</body>
+</html>
+
