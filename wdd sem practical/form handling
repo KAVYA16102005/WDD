@@ -2,6 +2,50 @@
 <html>
 <head>
     <title>Blood Donation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        center {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #c62828;
+            font-size: 28px;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
+            text-align: left;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #c62828;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #b71c1c;
+        }
+        p {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+    </style>
 </head>
 <body>
 <center>
@@ -25,6 +69,7 @@
         </select><br><br>
         <input type="submit" value="Submit">
     </form>
+
     <?php
     if($_POST){
         $email = $_POST['email'];
@@ -33,12 +78,11 @@
         if (preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/", $email)) {
             echo "<p>Registered Successfully!</p>";
         } else {
-            echo "<p>Invalid email! Use format like: example@mail.com</p>";
+            echo "<p style='color:#d32f2f;'>Invalid email! Use format like: example@mail.com</p>";
         }
     }
     ?>
 </center>
 </body>
 </html>
-
 
