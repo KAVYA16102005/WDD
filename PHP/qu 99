@@ -1,0 +1,32 @@
+99. Build a PHP program to apply the following tasks using session.
+(a) Initiate a session (or pick up an existing one).
+(b) Check for the existence of a pre-existing entry in $_SESSION. If not present, assume that the session is new.
+(c) Increment a counter that tracks how many times that the user has visited this page.
+(d) Store the incremented counter back in $_SESSION.
+(e) Provide a link back to the page itself, embedding the session ID as an argument if it is found.
+(f) Using PHP, construct a program to restrict the user from uploading the same file again and again. If the same file already exists in that folder, display an appropriate error message. 
+<?php
+session_start();
+// (a) Start session done above
+if (!isset($_SESSION['visits'])) {
+    $_SESSION['visits'] = 0;  // (b) assume new
+}
+$_SESSION['visits']++;  // (c) increment
+echo "Visited: " . $_SESSION['visits'] . " times.<br>";  // (d)
+// (e) Provide link with session id
+echo "<a href='?".session_name()."=".session_id()."'>Reload Page</a><br>";
+// (f) Restrict same file upload
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $target = "uploads/" . basename($_FILES["file"]["name"]);
+    if (file_exists($target)) {
+        echo "Error: File already exists!";
+    } else {
+        move_uploaded_file($_FILES["file"]["tmp_name"], $target);
+        echo "Uploaded successfully!";
+    }
+}
+?>
+<form method="post" enctype="multipart/form-data">
+    Select file: <input type="file" name="file">
+    <input type="submit" value="Upload">
+</form>
