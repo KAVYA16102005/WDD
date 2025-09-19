@@ -1,0 +1,14 @@
+56.What are all the Functions available to sort a PHP array?
+      PHP has many sorting functions:
+1.	sort() → Sorts indexed array in ascending order.
+2.	rsort() → Sorts indexed array in descending order.
+3.	asort() → Sorts associative array by value (ascending).
+4.	arsort() → Sorts associative array by value (descending).
+5.	ksort() → Sorts associative array by key (ascending).
+6.	krsort() → Sorts associative array by key (descending).
+7.	usort() → User-defined custom sort (values).
+8.	uksort() → User-defined custom sort (keys).
+9.	uasort() → User-defined custom sort (associative array, maintains index).
+10.	natsort() → Natural order sorting.
+11.	natcasesort() → Case-insensitive natural order sort.
+12.	array_multisort() → Sorts multiple arrays or multi-dimensional arrays.
