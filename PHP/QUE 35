@@ -1,0 +1,13 @@
+35. Write a PHP script using an array that checks if a string contains another string and displays the result.
+<?php
+$haystack = "Hello, welcome to PHP world!";
+$needle = "PHP";
+// check if $needle is inside $haystack
+if (strpos($haystack, $needle) !== false) {
+    echo "The string contains '$needle'.";
+} else {
+    echo "The string does not contain '$needle'.";
+}
+?>
+Output:
+The string contains 'PHP'.
