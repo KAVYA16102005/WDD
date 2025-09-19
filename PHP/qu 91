@@ -1,0 +1,5 @@
+91. Recognize how sessions are stored in PHP?
+•	By default, PHP stores sessions on the server-side as temporary files.
+•	Each session has a unique session ID (sent to the client via cookie PHPSESSID).
+•	On Linux, session files are usually stored in /tmp.
+•	You can configure session storage using php.ini (session.save_path).
