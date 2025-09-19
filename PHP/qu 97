@@ -1,0 +1,7 @@
+97. Discover the various session functions of PHP. Explain its behavior.
+•	session_start() → Starts a session.
+•	session_destroy() → Destroys session.
+•	session_unset() → Removes all variables.
+•	session_id() → Get/Set session ID.
+•	session_name() → Get/Set session name.
+•	session_regenerate_id() → Generates new session ID.
