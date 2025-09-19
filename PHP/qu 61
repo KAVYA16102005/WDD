@@ -1,0 +1,11 @@
+61. Recall the steps to delete an element from an array?
+      1. Use unset($array[index]) to remove an element.
+      2 .Optionally, use array_values($array) to reindex numeric arrays.
+<?php
+$fruits = array("Apple", "Banana", "Mango", "Orange");
+unset($fruits[1]); // remove Banana
+$fruits = array_values($fruits); // reindex
+print_r($fruits);
+?>
+Output:
+Array ( [0] => Apple [1] => Mango [2] => Orange )
