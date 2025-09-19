@@ -1,0 +1,18 @@
+67. Construct a program that tokenizes a sentence into words using regular expressions. Then, count the number of occurrences of each word and display the results.
+ <?php
+$sentence = "PHP is great and PHP is powerful";
+// Tokenize using regex (split by non-letters)
+$words = preg_split("/\W+/", strtolower($sentence), -1, PREG_SPLIT_NO_EMPTY);
+// Count occurrences
+$counts = array_count_values($words);
+// Display result
+foreach ($counts as $word => $count) {
+    echo "$word : $count <br>";
+}
+?>
+Output:
+php : 2
+is : 2
+great : 1
+and : 1
+powerful : 1
