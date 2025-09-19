@@ -1,0 +1,24 @@
+57. Outline the Regular Expression with appropriate examples.
+Definition:
+Regular Expressions (Regex) are patterns used to match and manipulate strings.
+      Common Syntax in PHP (with preg_match, preg_match_all, preg_replace):
+•	Match digits → /[0-9]+/
+            preg_match("/[0-9]+/", "Order123", $m); // matches "123"
+•	Match email → /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/
+               preg_match("/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/", "Contact me:      test@mail.com", $m);
+•	Replace spaces with dashes
+echo preg_replace("/\s+/", "-", "Hello World PHP"); // "Hello-World-PHP"
+•	Validate phone number (10 digits)
+preg_match("/^[0-9]{10}$/", "9876543210"); // valid
+58. <?php
+$str = "Emails: admin@example.com, support@test.org, info@mywebsite.net";
+preg_match_all("/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/", $str, $matches);
+print_r($matches[0]);
+?>
+Output:
+Array
+(
+    [0] => admin@example.com
+    [1] => support@test.org
+    [2] => info@mywebsite.net
+)
