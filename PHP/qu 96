@@ -1,0 +1,6 @@
+96. How to register a variable in a PHP session? Give an example.
+<?php
+session_start();
+$_SESSION['username'] = "Kavya";  // registered in session
+echo "Session variable set: " . $_SESSION['username'];
+?>
