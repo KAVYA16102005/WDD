@@ -1,0 +1,33 @@
+52.Compare stack and queue operations using PHP with appropriate examples.
+•	Stack = LIFO (Last In, First Out)
+•	Queue = FIFO (First In, First Out)
+
+<?php
+$stack = array();
+// Push elements
+array_push($stack, "A");
+array_push($stack, "B");
+array_push($stack, "C");
+// Pop last element
+$last = array_pop($stack);
+print_r($stack);
+echo "Popped (Stack): $last";
+?>
+Output:
+Array ( [0] => A [1] => B )
+Popped (Stack): C
+Queue Example (using push + shift):
+<?php
+$queue = array();
+// Enqueue
+array_push($queue, "A");
+array_push($queue, "B");
+array_push($queue, "C");
+// Dequeue (remove first element)
+$first = array_shift($queue);
+print_r($queue);
+echo "Dequeued (Queue): $first";
+?>
+Output:
+Array ( [0] => B [1] => C )
+Dequeued (Queue): A
