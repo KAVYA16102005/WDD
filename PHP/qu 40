@@ -1,0 +1,9 @@
+40. Write a PHP script to remove all characters from a string except a-z A-Z 0-9 or " " using an array.
+ <?php
+$str = "Hello@123! PHP# is $cool.";
+// keep only letters, numbers, and spaces
+$clean = preg_replace("/[^a-zA-Z0-9 ]/", "", $str);
+echo $clean;
+?>
+Output:
+Hello123 PHP is cool
