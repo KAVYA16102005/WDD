@@ -1,0 +1,15 @@
+72. Write the PHP program to implement the following session functions.
+(i)session_register() (ii) session_unset() (iii) session_destroy()
+<?php
+session_start();
+// (i) session_register() is deprecated; instead, directly use $_SESSION
+$_SESSION['username'] = "Kavya";
+// Display session value
+echo "Username: " . $_SESSION['username'] . "<br>";
+// (ii) Unset a session variable
+session_unset(); // removes all session variables
+echo "Session unset!<br>";
+// (iii) Destroy the session
+session_destroy();
+echo "Session destroyed!";
+?>
