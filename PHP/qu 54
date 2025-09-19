@@ -1,0 +1,18 @@
+54. Design a PHP program that simulates a ticket booking queue using built-in array functions.
+<?php
+$queue = array();
+// Customers enter queue
+array_push($queue, "Alice");
+array_push($queue, "Bob");
+array_push($queue, "Clara");
+// Process ticket booking (dequeue)
+echo array_shift($queue) . " booked a ticket.<br>";
+echo array_shift($queue) . " booked a ticket.<br>";
+// Remaining in queue
+echo "Waiting Queue: ";
+print_r($queue);
+?>
+Output:
+Alice booked a ticket.
+Bob booked a ticket.
+Waiting Queue: Array ( [0] => Clara )
