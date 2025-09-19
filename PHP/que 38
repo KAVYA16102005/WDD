@@ -1,0 +1,13 @@
+38. Interpret the steps to iterate over a PHP array using a while loop with an example
+<?php
+$colors = array("Red", "Green", "Blue");
+reset($colors); // move pointer to first element
+while (($value = current($colors)) !== false) {
+    echo "Color: " . $value . "<br>";
+    next($colors); // move pointer forward
+}
+?>
+Output:
+Color: Red
+Color: Green
+Color: Blue
