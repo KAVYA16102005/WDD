@@ -1,0 +1,17 @@
+48. Record number handling in PHP with suitable examples.
+<?php
+// Array of student records with roll numbers
+$students = array(
+    array("RollNo"=>101, "Name"=>"Alice", "Marks"=>85),
+    array("RollNo"=>102, "Name"=>"Bob", "Marks"=>72),
+    array("RollNo"=>103, "Name"=>"Clara", "Marks"=>91)
+);
+// Access a record by roll number
+foreach ($students as $student) {
+    if ($student["RollNo"] == 102) {
+        echo "Found Record: RollNo {$student['RollNo']}, Name {$student['Name']}, Marks {$student['Marks']}";
+    }
+}
+?>
+Output:
+Found Record: RollNo 102, Name Bob, Marks 72
