@@ -1,0 +1,11 @@
+66. Difference between count() and sizeof() function in PHP..  
+           1.count() → Returns the number of elements in an array or object.
+           2.sizeof() → Alias of count(). Both behave the same.
+<?php
+$fruits = array("Apple", "Banana", "Mango");
+echo "Using count(): " . count($fruits) . "<br>";
+echo "Using sizeof(): " . sizeof($fruits);
+?>
+Output:
+Using count(): 3
+Using sizeof(): 3
