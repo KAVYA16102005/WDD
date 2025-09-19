@@ -1,0 +1,12 @@
+71. Tell the different file handling modes available in PHP?
+Mode	                                 Description
+"r"           	Open for reading only (file pointer starts at beginning).
+"r+"	Open for reading and writing (pointer at beginning).
+"w"	Open for writing only (erases file, creates new if not exists).
+"w+"	Open for reading and writing (erases file, creates new if not exists).
+"a"	Open for writing only (pointer at end, creates file if not exists).
+"a+"	Open for reading and writing (pointer at end).
+"x"	Create and open for writing (fails if file exists).
+"x+"	Create and open for reading/writing (fails if file exists).
+"c"	Open for writing only (does not erase file, creates if not exists).
+"c+"	Open for reading/writing (does not erase, creates if not exists).
