@@ -1,0 +1,10 @@
+75. Build a PHP function that takes the filename and a new line of content as input. Append the new line of content as a new line at the end of the file.
+<?php
+function appendLine($filename, $newLine) {
+    $file = fopen($filename, "a");
+    fwrite($file, $newLine . PHP_EOL);
+    fclose($file);
+}
+appendLine("notes.txt", "This is a new line.");
+?>
+
