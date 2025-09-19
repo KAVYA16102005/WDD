@@ -1,0 +1,16 @@
+73. Develop a PHP program to display an error message when a file other than jpg or png is uploaded.
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $fileType = strtolower(pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION));
+
+    if ($fileType != "jpg" && $fileType != "png") {
+        echo "Error: Only JPG and PNG files are allowed.";
+    } else {
+        echo "File uploaded successfully!";
+    }
+}
+?>
+<form method="post" enctype="multipart/form-data">
+    Select image: <input type="file" name="file">
+    <input type="submit" value="Upload">
+</form>
