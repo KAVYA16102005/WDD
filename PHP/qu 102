@@ -1,0 +1,10 @@
+102. Develop a PHP program to use session variables and start a session.
+<?php
+session_start();  // start session
+// Set session variables
+$_SESSION["username"] = "Kavya";
+$_SESSION["role"] = "Admin";
+// Retrieve
+echo "User: " . $_SESSION["username"] . "<br>";
+echo "Role: " . $_SESSION["role"];
+?>
