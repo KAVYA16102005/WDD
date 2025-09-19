@@ -1,0 +1,8 @@
+77. Classify the various network functions which provide network information or functions.
+PHP has functions for network info:
+•	gethostbyname() → Gets IP of hostname
+•	gethostbyaddr() → Gets hostname by IP
+•	gethostbynamel() → Returns list of IPs for hostname
+•	getservbyport() → Service by port number
+•	getprotobyname() / getprotobynumber() → Protocol details
+•	ip2long() and long2ip() → Convert IP formats
