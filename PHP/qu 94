@@ -1,0 +1,18 @@
+94. Evaluate the different file handling modes available in PHP with appropriate examples.
+•	"r" → Read only
+•	"w" → Write (erase old content)
+•	"a" → Append (write at end)
+•	"x" → Create new file (error if exists)
+•	"r+" → Read + Write
+•	"w+" → Read + Write (overwrite)
+•	"a+" → Read + Write (append)
+<?php
+// Write Mode
+$f = fopen("test.txt", "w");
+fwrite($f, "Hello World!");
+fclose($f);
+// Read Mode
+$f = fopen("test.txt", "r");
+echo fread($f, filesize("test.txt"));
+fclose($f);
+?>
