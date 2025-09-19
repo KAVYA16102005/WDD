@@ -1,0 +1,13 @@
+46. Write a PHP program to find the index of a specific value in an array.
+ <?php
+$colors = array("Red", "Green", "Blue", "Yellow");
+$search = "Blue";
+$index = array_search($search, $colors);
+if ($index !== false) {
+    echo "$search found at index $index";
+} else {
+    echo "$search not found";
+}
+?>
+Output:
+Blue found at index 2
