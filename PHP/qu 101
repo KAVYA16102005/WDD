@@ -1,0 +1,12 @@
+101. Identify, how a cookie’s value can be retrieved in a web application?
+Cookies are stored client-side but accessed on the server through $_COOKIE.
+•	You retrieve it using $_COOKIE['cookieName'].
+•	Always check with isset() before using.
+<?php
+setcookie("user", "Kavya", time()+3600, "/"); // set cookie
+if (isset($_COOKIE["user"])) {
+    echo "Cookie Value: " . $_COOKIE["user"];
+} else {
+    echo "Cookie not set yet!";
+}
+?>
