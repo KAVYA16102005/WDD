@@ -1,0 +1,17 @@
+47. Delete an element from the below array. And print the array elements in PHP. $x = array (1, 2, 3, 4, 5);
+<?php
+$x = array(1, 2, 3, 4, 5);
+// remove element "3"
+unset($x[2]);
+// reindex array
+$x = array_values($x);
+print_r($x);
+?>
+Output:
+Array
+(
+    [0] => 1
+    [1] => 2
+    [2] => 4
+    [3] => 5
+)
