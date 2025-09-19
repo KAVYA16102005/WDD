@@ -1,0 +1,7 @@
+95. Discuss the purpose and functionality of PHP sessions and outline their potential application in maintaining a user's shopping cart state across multiple pages.
+•	Purpose: Sessions store user data across multiple pages (unlike cookies, data is server-side).
+•	Functionality: Maintain user state such as login, preferences, cart items.
+•	Example (Shopping Cart):
+1.	Page 1 → User adds items ($_SESSION['cart'][] = "item1";
+2.	Page 2 → Cart is displayed by reading $_SESSION['cart'].
+•	This ensures continuity even if the user navigates across multiple pages.
