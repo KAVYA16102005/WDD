@@ -1,0 +1,14 @@
+60. Write a PHP function to search a specified value within the values of an associative array.
+<?php
+function searchValue($array, $value) {
+    return in_array($value, $array);
+}
+$students = array("101" => "Alice", "102" => "Bob", "103" => "Clara");
+if (searchValue($students, "Bob")) {
+    echo "Value found!";
+} else {
+    echo "Value not found!";
+}
+?>
+Output:
+Value found!
