@@ -1,0 +1,8 @@
+89. Construct a PHP program to read a file using file operation.
+<?php
+$file = fopen("example.txt", "r");
+while(!feof($file)) {
+    echo fgets($file) . "<br>";
+}
+fclose($file);
+?>
