@@ -1,0 +1,15 @@
+86. PHP File functions with example program.
+Some useful file functions:
+•	fopen(), fclose(), fread(), fwrite()
+•	file_exists(), filesize(), unlink()
+•	file_get_contents(), file_put_contents()
+<?php
+$file = "test.txt";
+// Writing
+file_put_contents($file, "Hello World!\n", FILE_APPEND);
+// Reading
+if (file_exists($file)) {
+    $data = file_get_contents($file);
+    echo "File Content:<br>" . nl2br($data);
+}
+?>
