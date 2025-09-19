@@ -1,0 +1,12 @@
+59. Create a function that takes an array of numbers as input and returns the average value.
+<?php
+function average($numbers) {
+    if (count($numbers) == 0) return 0;
+    return array_sum($numbers) / count($numbers);
+}
+// Example
+$nums = array(10, 20, 30, 40);
+echo "Average: " . average($nums);
+?>
+Output:
+Average: 25
